@@ -1,9 +1,8 @@
-from fastapi import FastAPI, Depends, HTTPException, Body, Response
+from fastapi import FastAPI, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 from datetime import date, datetime, timedelta
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import desc
-from fastapi.encoders import jsonable_encoder
 from typing import Optional
 
 
@@ -36,7 +35,6 @@ from schemas import (
     CompleteWorkoutRequest,
     SleepLogCreate,    
     SleepLogResponse,
-    DashboardStatsResponse
 )
 
 from auth import (
@@ -52,9 +50,6 @@ from email_utils import send_verification_email
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-
-
-from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
@@ -214,8 +209,6 @@ def create_profile(
         is_complete=True,
     )
     db.add(profile)
-    
-    user.profile_complete = True 
     db.commit()
     db.refresh(profile)
     return {"message": "Profile completed"}

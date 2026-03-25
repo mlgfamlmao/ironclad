@@ -11,3 +11,6 @@ email-validator
 pydantic
 pydantic-settings
 google-genai
+fastapi-mail
+fpdf2
+python-dotenv

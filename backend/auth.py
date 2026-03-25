@@ -1,5 +1,6 @@
 import bcrypt
-import jwt
+from jose import jwt
+from jose.exceptions import ExpiredSignatureError, JWTError
 from datetime import datetime, timedelta
 import random
 
@@ -11,7 +12,9 @@ from db import SessionLocal
 from models import User
 
 
-SECRET_KEY = "super-secret-key"
+import os
+
+SECRET_KEY = os.getenv("SECRET_KEY", "super-secret-key")
 ALGORITHM = "HS256"
 
 security = HTTPBearer()
@@ -19,10 +22,6 @@ security = HTTPBearer()
 
 
 
-
-
-def generate_verification_code() -> str:
-    return str(random.randint(100000, 999999))
 
 
 def generate_verification_code_with_expiration() -> tuple:
@@ -65,9 +64,9 @@ def decode_token(token: str) -> str | None:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload["sub"]  
-    except jwt.ExpiredSignatureError:
+    except ExpiredSignatureError:
         return None
-    except jwt.InvalidTokenError:
+    except JWTError:
         return None
 
 

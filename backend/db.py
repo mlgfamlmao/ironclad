@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
 DBkey = os.getenv("DATABASE_URL")
 
 if not DBkey:

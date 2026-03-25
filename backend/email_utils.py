@@ -16,12 +16,11 @@ conf = ConnectionConfig(
 
 async def send_verification_email(email: str, code: str):
     message = MessageSchema(
-    subject="Verify your email",
-    recipients=[email],
-    body=f"Your verification code is: {code}",
-    subtype="plain"
-)
-
+        subject="Verify your email",
+        recipients=[email],
+        body=f"Your verification code is: {code}",
+        subtype="plain"
+    )
 
     fm = FastMail(conf)
     await fm.send_message(message)
