@@ -1,0 +1,21 @@
+# Environment variables
+.env
+backend/.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+
+# Build output
+frontend/dist/
+
+# Database
+*.db

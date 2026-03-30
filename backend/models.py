@@ -111,7 +111,6 @@ class DailyWorkout(Base):
     notes = Column(Text, nullable=True)
 
     plan = relationship("TrainingPlan", back_populates="workouts")
-    zwo_content = Column(Text, nullable=True)
 
     @property
     def has_zwo(self):
